@@ -1,52 +1,21 @@
-import express from "express"; 
-const app = express(); 
-const port = 3000; 
-app.get("/", (req, res) => { 
-res.send("Hello World!"); 
-}); 
-app.get("/service", (req, res) => { 
-//request 
-const ipAddress = req.ip; 
-const now = new Date(); 
-//response 
-res.status(200).json({ 
-status: "success", 
-message: "Service data retrieved successfully", 
-data: { 
-ip: ipAddress, 
-datetime: now.toISOString(), 
-}, 
-}); 
-}); 
-// Endpoint yang mengembalikan button HTML 
-app.get("/button", (req, res) => { 
-res.send(` 
-<button onclick="alert('Halo dari Server!')"> 
-User Action 
-</button> 
-`); 
-}); 
+import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
 
-app.get("/service", (req, res) => {
-  const ipAddress = req.ip;
-  const now = new Date();
+const app = express();
+const PORT = 3000;
 
-  res.status(200).json({
-    status: "success",
-    message: "Service data retrieved successfully",
-    data: {
-      ip: ipAddress,
-      datetime: now.toISOString(),
-    },
-  });
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Gunakan folder public
+app.use(express.static(path.join(__dirname, "public")));
+
+// Route utama
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
-app.get("/button", (req, res) => {
-  res.send(`
-    <button onclick="alert('Halo dari Server!')">
-      User Action
-    </button>
-  `);
-});
-app.listen(port, () => { 
-console.log(`Server is running on port http://localhost:${port}`);
+
+app.listen(PORT, () => {
+  console.log(`Server berjalan di http://localhost:${PORT}`);
 });
