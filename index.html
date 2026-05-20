@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sandy Surendra Saade</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f7f5f0;
+      --bg-alt:    #efecea;
+      --navy:      #0d1f3c;
+      --navy-mid:  #1a3460;
+      --navy-light:#2a4a80;
+      --amber:     #e8980a;
+      --amber-bright: #f5a623;
+      --amber-pale:   rgba(232,152,10,0.10);
+      --text:      #0d1f3c;
+      --text-muted:#5a6e8a;
+      --border:    rgba(13,31,60,0.12);
+      --card-bg:   #ffffff;
+      --accent-line: 3px solid var(--amber);
+      --shadow:    0 2px 16px rgba(13,31,60,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── BACKGROUND subtle dot grid ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(13,31,60,0.07) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── soft amber glow top-right ── */
+    body::after {
+      content: '';
+      position: fixed;
+      top: -80px; right: -80px;
+      width: 420px; height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(245,166,35,0.18) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── LAYOUT ── */
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      padding: 72px 0 52px;
+      position: relative;
+    }
+
+    .header-tag {
+      display: inline-block;
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 18px;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.1s forwards;
+    }
+
+    header h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      color: var(--navy);
+      opacity: 0;
+      animation: fadeUp 0.6s 0.2s forwards;
+    }
+
+    header h1 span {
+      color: var(--amber);
+    }
+
+    .header-subtitle {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-top: 10px;
+      letter-spacing: 0.2px;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.3s forwards;
+    }
+
+    .header-contacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 22px;
+      margin-top: 28px;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.4s forwards;
+    }
+
+    .contact-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-chip:hover { color: var(--amber); }
+
+    .contact-chip svg {
+      width: 14px; height: 14px;
+      flex-shrink: 0;
+      stroke: currentColor;
+    }
+
+    .header-divider {
+      margin-top: 48px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--amber) 0%, var(--navy) 40%, transparent 80%);
+      opacity: 0;
+      animation: fadeIn 0.8s 0.5s forwards;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 32px 0 52px;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.5s forwards;
+    }
+
+    nav a {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--navy-light);
+      padding: 7px 15px;
+      border: 1.5px solid var(--border);
+      border-radius: 4px;
+      background: var(--card-bg);
+      transition: all 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--card-bg);
+      background: var(--navy);
+      border-color: var(--navy);
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      margin-bottom: 64px;
+      opacity: 0;
+      animation: fadeUp 0.7s forwards;
+    }
+
+    section:nth-child(1) { animation-delay: 0.55s; }
+    section:nth-child(2) { animation-delay: 0.65s; }
+    section:nth-child(3) { animation-delay: 0.7s; }
+    section:nth-child(4) { animation-delay: 0.75s; }
+    section:nth-child(5) { animation-delay: 0.8s; }
+    section:nth-child(6) { animation-delay: 0.85s; }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .section-label h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--navy);
+      white-space: nowrap;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1.5px;
+      background: linear-gradient(90deg, var(--amber) 0%, var(--border) 60%);
+    }
+
+    /* ── PROFIL ── */
+    .profil-text {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--text);
+      font-weight: 400;
+      max-width: 680px;
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-left: var(--accent-line);
+      border-radius: 0 8px 8px 0;
+      padding: 24px 28px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--amber) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: 0 6px 28px rgba(13,31,60,0.13);
+      transform: translateX(4px);
+    }
+
+    .card:hover::before { opacity: 1; }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .card-period {
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--amber);
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+      background: var(--amber-pale);
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(232,152,10,0.25);
+    }
+
+    .card-role {
+      font-size: 0.83rem;
+      color: var(--navy-light);
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+
+    .card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    .card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .card ul li {
+      font-size: 0.87rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .card ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--amber);
+      font-size: 10px;
+      top: 3px;
+    }
+
+    /* ── PROJECT GRID ── */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--amber), var(--navy));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .project-card:hover {
+      box-shadow: 0 8px 28px rgba(13,31,60,0.14);
+      transform: translateY(-4px);
+    }
+
+    .project-card:hover::after { transform: scaleX(1); }
+
+    .project-icon {
+      font-size: 22px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .project-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 7px;
+    }
+
+    .project-card p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ── ORGANISASI ── */
+    .org-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .org-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      transition: all 0.2s;
+    }
+
+    .org-item:hover {
+      border-color: var(--amber);
+      box-shadow: 0 4px 18px rgba(232,152,10,0.12);
+    }
+
+    .org-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--amber);
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .org-item p {
+      font-size: 0.87rem;
+      color: var(--navy);
+      line-height: 1.55;
+      font-weight: 500;
+    }
+
+    .org-item small {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 3px;
+      font-weight: 400;
+    }
+
+    /* ── KONTAK ── */
+    .kontak-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+    }
+
+    .kontak-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: var(--shadow);
+      transition: all 0.2s;
+    }
+
+    .kontak-card:hover {
+      border-color: var(--amber);
+      box-shadow: 0 6px 22px rgba(232,152,10,0.14);
+      transform: translateY(-2px);
+    }
+
+    .kontak-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .kontak-val {
+      font-size: 0.85rem;
+      color: var(--navy);
+      word-break: break-all;
+      font-weight: 500;
+    }
+
+    .kontak-icon { font-size: 18px; }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 28px 24px;
+      border-top: 1.5px solid var(--border);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      background: var(--bg);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      header { padding: 48px 0 36px; }
+      header h1 { font-size: 2rem; }
+      .project-grid { grid-template-columns: 1fr; }
+      .kontak-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <header>
+    <span class="header-tag">Portfolio &amp; CV</span>
+    <h1>Sandy Surendra <span>Saade</span></h1>
+    <p class="header-subtitle">Mahasiswa D4 Teknik Elektronika Industri &nbsp;·&nbsp; Politeknik Negeri Padang</p>
+
+    <div class="header-contacts">
+      <a class="contact-chip" href="mailto:s4ndysurendra@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        s4ndysurendra@gmail.com
+      </a>
+      <a class="contact-chip" href="tel:+6289617041183">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.17h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96A16 16 0 0 0 15 16.04l.96-.96a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 17.39z"/></svg>
+        +62 896-1704-1183
+      </a>
+      <a class="contact-chip" href="https://linkedin.com/in/sandysurendrasaade" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        linkedin.com/in/sandysurendrasaade
+      </a>
+      <span class="contact-chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        Padang, Sumatra Barat
+      </span>
+    </div>
+
+    <div class="header-divider"></div>
+  </header>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#profil">Profil</a>
+    <a href="#pengalaman">Pengalaman</a>
+    <a href="#pendidikan">Pendidikan</a>
+    <a href="#proyek">Proyek</a>
+    <a href="#organisasi">Organisasi</a>
+    <a href="#kontak">Kontak</a>
+  </nav>
+
+  <main>
+
+    <!-- PROFIL -->
+    <section id="profil">
+      <div class="section-label"><h2>Profil Singkat</h2></div>
+      <p class="profil-text">
+        Mahasiswa semester 6 D4 Teknik Elektronika Industri di Politeknik Negeri Padang
+        dengan fokus pada sistem kendali dan otomasi industri. Memiliki pengalaman praktik
+        di bidang PLC, sensor, dan mikrokontroler, serta mampu bekerja sama dengan baik
+        dalam tim teknis maupun lintas divisi.
+      </p>
+    </section>
+
+    <!-- PENGALAMAN KERJA -->
+    <section id="pengalaman">
+      <div class="section-label"><h2>Pengalaman Kerja</h2></div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>PT Frensiand Jaya Teknik</h3>
+          <span class="card-period">Jun 2022 – Okt 2022</span>
+        </div>
+        <div class="card-role">Asisten Tim Projek PLC (Magang)</div>
+        <ul>
+          <li>Wiring panel kontrol industri berbasis PLC Mitsubishi &amp; inverter Schneider.</li>
+          <li>Membaca serta menerapkan gambar rangkaian kelistrikan pada sistem konveyor otomatis.</li>
+          <li>Terlibat dalam instalasi &amp; pengujian sistem kontrol untuk proyek PT Mayora Indah, PT Aqua, dan Indofood.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>PT Kunango Jantan</h3>
+          <span class="card-period">Mei 2021 – Sep 2021</span>
+        </div>
+        <div class="card-role">Asisten Tim Engineer (Magang)</div>
+        <ul>
+          <li>Membantu maintenance dan perbaikan mesin produksi seperti batching, bending, spinner, dan hoist crane.</li>
+          <li>Melakukan inspeksi dan pencatatan hasil perawatan untuk mendukung efisiensi produksi.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Bopet Radjawali Djuanda</h3>
+          <span class="card-period">Des 2022 – Agu 2025</span>
+        </div>
+        <div class="card-role">Pelayan (Kerja Part Time)</div>
+        <ul>
+          <li>Melayani pelanggan dan membantu operasional restoran pada akhir pekan dan masa libur kuliah.</li>
+          <li>Terbiasa bekerja dalam situasi ramai dan cepat, melatih komunikasi dan kerja tim.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- PENDIDIKAN -->
+    <section id="pendidikan">
+      <div class="section-label"><h2>Pendidikan</h2></div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>D4 Teknik Elektronika Industri</h3>
+          <span class="card-period">Agu 2023 – Sekarang</span>
+        </div>
+        <div class="card-role">Politeknik Negeri Padang</div>
+        <ul>
+          <li>Berfokus pada sistem kendali dan otomasi industri.</li>
+          <li>Pemrograman PLC dan mikrokontroler menggunakan CX-Programmer dan Arduino IDE.</li>
+          <li>Perancangan rangkaian dan desain PCB menggunakan KiCad.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Teknik Mekatronika</h3>
+          <span class="card-period">Jul 2019 – Mei 2023</span>
+        </div>
+        <div class="card-role">SMKN 1 Sumatra Barat</div>
+        <ul>
+          <li>Mempelajari dasar sistem mekanik, elektronika, dan kontrol otomasi industri.</li>
+          <li>Pembuatan dan perakitan panel listrik motor 3 fasa.</li>
+          <li>Pemrograman PLC untuk sistem kontrol pneumatik menggunakan CX-Programmer dan FluidSim.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- PROYEK -->
+    <section id="proyek">
+      <div class="section-label"><h2>Pengalaman Proyek</h2></div>
+
+      <div class="project-grid">
+        <div class="project-card">
+          <span class="project-icon">⚙️</span>
+          <h3>Wiring PLC Konveyor</h3>
+          <p>Instalasi dan pengujian konveyor otomatis berbasis PLC Mitsubishi &amp; Omron untuk PT Mayora Indah dan PT Aqua Solok.</p>
+        </div>
+        <div class="project-card">
+          <span class="project-icon">📦</span>
+          <h3>Box Panel Konveyor Mini</h3>
+          <p>Merakit box panel dan wiring konveyor mini menggunakan Inverter Schneider untuk PT Indofood.</p>
+        </div>
+        <div class="project-card">
+          <span class="project-icon">🤖</span>
+          <h3>Robot Self Balancing</h3>
+          <p>Robot keseimbangan menggunakan Arduino Nano dan sensor MPU 6050 dengan kontroler PID.</p>
+        </div>
+        <div class="project-card">
+          <span class="project-icon">📷</span>
+          <h3>Stabilizer Tripod PID</h3>
+          <p>Sistem penstabil tripod kamera berbasis kontrol PID dengan sensor MPU 6050.</p>
+        </div>
+        <div class="project-card">
+          <span class="project-icon">🦾</span>
+          <h3>Robot Arm</h3>
+          <p>Lengan robot dengan kontrol real-time menggunakan potensiometer untuk pergerakan presisi.</p>
+        </div>
+        <div class="project-card">
+          <span class="project-icon">🌂</span>
+          <h3>Automatic Canopy System</h3>
+          <p>Kanopi otomatis untuk halaman belakang berbasis sensor hujan dan cahaya untuk menggerakkan motor DC.</p>
+        </div>
+        <div class="project-card">
+          <span class="project-icon">⚖️</span>
+          <h3>Pendeteksi Kehilangan Barang</h3>
+          <p>Alat deteksi perubahan beban menggunakan sensor load cell untuk memantau kehilangan barang.</p>
+        </div>
+        <div class="project-card">
+          <span class="project-icon">🚦</span>
+          <h3>PLC Traffic Light &amp; Sistem</h3>
+          <p>Simulasi traffic light 4 simpang, counter parkiran, dan lift 3 lantai menggunakan PLC.</p>
+        </div>
+        <div class="project-card">
+          <span class="project-icon">🔋</span>
+          <h3>Variable Power Supply</h3>
+          <p>Pembuatan power supply adjustable dengan tegangan keluaran yang dapat diatur sesuai kebutuhan.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ORGANISASI -->
+    <section id="organisasi">
+      <div class="section-label"><h2>Pengalaman Organisasi</h2></div>
+
+      <div class="org-list">
+        <div class="org-item">
+          <div class="org-dot"></div>
+          <div>
+            <p>Koordinator Departemen Liaison Officer — HMJE PNP</p>
+            <small>Periode 2025/2026</small>
+          </div>
+        </div>
+        <div class="org-item">
+          <div class="org-dot"></div>
+          <div>
+            <p>Koordinator Divisi Pengaduan — BANWASLU KM PNP</p>
+            <small>2024</small>
+          </div>
+        </div>
+        <div class="org-item">
+          <div class="org-dot"></div>
+          <div>
+            <p>Ketua Pelaksana Sosialisasi Alur Pengaduan — PEMIRA KM PNP</p>
+            <small>2024</small>
+          </div>
+        </div>
+        <div class="org-item">
+          <div class="org-dot"></div>
+          <div>
+            <p>Volunteer Tim Liaison Officer — Minangkabau Robotic Contest VIII</p>
+            <small>2024</small>
+          </div>
+        </div>
+        <div class="org-item">
+          <div class="org-dot"></div>
+          <div>
+            <p>Ketua Pelaksana Seminar Ketenagakerjaan — Pekan Kreativitas Mahasiswa</p>
+            <small>Semester Genap 2023/2024</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KONTAK -->
+    <section id="kontak">
+      <div class="section-label"><h2>Kontak</h2></div>
+
+      <div class="kontak-grid">
+        <a class="kontak-card" href="mailto:s4ndysurendra@gmail.com">
+          <span class="kontak-icon">📧</span>
+          <span class="kontak-label">Email</span>
+          <span class="kontak-val">s4ndysurendra@gmail.com</span>
+        </a>
+        <a class="kontak-card" href="tel:+6289617041183">
+          <span class="kontak-icon">📱</span>
+          <span class="kontak-label">Telepon</span>
+          <span class="kontak-val">+62 896-1704-1183</span>
+        </a>
+        <a class="kontak-card" href="https://linkedin.com/in/sandysurendrasaade" target="_blank">
+          <span class="kontak-icon">🔗</span>
+          <span class="kontak-label">LinkedIn</span>
+          <span class="kontak-val">linkedin.com/in/sandysurendrasaade</span>
+        </a>
+        <div class="kontak-card">
+          <span class="kontak-icon">📍</span>
+          <span class="kontak-label">Lokasi</span>
+          <span class="kontak-val">Padang, Sumatra Barat, Indonesia</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+</div>
+
+<footer>
+  <p>© 2026 Sandy Surendra Saade &nbsp;·&nbsp; Teknik Elektronika Industri</p>
+</footer>
+
+</body>
+</html>

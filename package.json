@@ -1,0 +1,28 @@
+{
+  "name": "mini-project-1-sandy",
+  "version": "1.0.0",
+  "description": "Testing Project 1 Sandy",
+  "keywords": [
+    "mini",
+    "project",
+    "sandy"
+  ],
+  "homepage": "https://github.com/sandysaade001-hash/Mini-Project-1-Sandy#readme",
+  "bugs": {
+    "url": "https://github.com/sandysaade001-hash/Mini-Project-1-Sandy/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/sandysaade001-hash/Mini-Project-1-Sandy.git"
+  },
+  "license": "ISC",
+  "author": "Sandy",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
